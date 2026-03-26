@@ -29,7 +29,7 @@ Utilize o arquivo `debug_facts.yml` na raiz da sua pasta de trabalho:
     - name: 📝 Exibir todos os dados coletados na saída do Job
       ansible.builtin.debug:
         var: ansible_facts
-~~~ccccccccccccccccc
+~~~
 
 ### 3. Execução no AAP
 * Crie um **Job Template** chamado `[Workshop] - Gather Facts - Seu Nome`.
