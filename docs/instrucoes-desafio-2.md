@@ -113,10 +113,12 @@ Configure o arquivo na raiz para associar as roles aos grupos corretos do invent
     - ? # TODO: Invoque a role de loadbalancer
 ~~~
 
-### 5. Execução no AAP
-1. **Salvar:** Salve tudo no VS Code (o link simbólico sincroniza automaticamente).
-2. **Job Template:** No AAP, crie um Job Template chamado **`Desafio 2 - Alta Disponibilidade (Web & LB) - Seu Nome`**.
-3. **Configuração:** Selecione o projeto manual e o Playbook **`website_run.yml`**.
+### 5. Publicação e Validação (AAP)
+Como você está usando um **Link Simbólico**, não é necessário fazer upload. O AAP reflete suas alterações assim que você salva o arquivo no VS Code.
+
+1. No console do AAP, crie um novo Job Template chamado **`Desafio 2 - Alta Disponibilidade (Web & LB) - Seu Nome`**.
+2. Selecione o Playbook **`website_run.yml`**.
+3. Garanta que a credencial de **Machine** esteja selecionada.
 4. **Launch:** Execute e acompanhe a mágica acontecer!
 
 ---
