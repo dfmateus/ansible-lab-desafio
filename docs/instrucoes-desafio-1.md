@@ -25,13 +25,15 @@ Utilize o arquivo `debug_facts.yml` na raiz da sua pasta de trabalho:
 
 ~~~yaml
 ---
-- name: 🔍 Explorando os Ansible Facts (Fatos do Ansible)
+- name: 🔍 Coletando e Salvando Facts Localmente
   hosts: all
   gather_facts: true
   tasks:
-    - name: 📝 Exibir todos os dados coletados na saída do Job
-      ansible.builtin.debug:
-        var: ansible_facts
+    - name: 💾 Salvar facts em um arquivo JSON local
+      delegate_to: localhost
+      ansible.builtin.copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: "./facts_{{ inventory_hostname }}.json"
 ~~~
 
 ### 2. Execução pelo ansible-navigator (Local)
