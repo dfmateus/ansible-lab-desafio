@@ -40,11 +40,12 @@ Complete o template substituindo os `{{ ? }}`:
 ~~~
 
 ### 2. Template do Load Balancer (`roles/loadbalancer/templates/haproxy.cfg.j2`)
-Utilize um loop Jinja2 para listar os servidores do grupo `webservers`:
+- Utilize um loop Jinja2 para listar os servidores do grupo `webservers`:
+- Adicione o seguinte bloco dentro do template, substituindo os `{{ ? }}`:
 ~~~haproxy
 backend backend_lab
     balance roundrobin
-    {% for host in groups['webservers'] %}
+    {% for host in groups['?'] %}
     server {{ host }} {{ hostvars[host]['ansible_default_ipv4']['address'] }}:80 check
     {% endfor %}
 ~~~
