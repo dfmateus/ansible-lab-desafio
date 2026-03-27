@@ -37,7 +37,7 @@ Utilize o arquivo `debug_facts.yml` na raiz da sua pasta de trabalho:
 ### 2. Execução pelo ansible-navigator (Local)
 No terminal do VS Code, execute o playbook para visualizar os facts coletados dos servidores:
 ~~~bash
-ansible-navigator run debug_facts.yml -i inventory/hosts.yml --mode stdout
+ansible-navigator run debug_facts.yml -i inventory/hosts --mode stdout
 ~~~
 **Dica:** Analise a saída JSON para identificar as chaves exatas que você usará no relatório (ex: `ansible_memtotal_mb`, `ansible_distribution`, etc).
 
