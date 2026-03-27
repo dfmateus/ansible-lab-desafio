@@ -1,6 +1,6 @@
-# 🚀 Ansible Lab Desafio: Automation Workshop (Modo Local + Link Simbólico)
+# 🚀 Ansible Lab Desafio: Automation Workshop
 
-Bem-vindo ao repositório oficial do desafio prático de Ansible! Este ambiente foi projetado para simular um cenário real de automação utilizando o **Ansible Automation Platform (AAP)** em um ambiente isolado.
+Bem-vindo ao desafio prático de Ansible! Este ambiente utiliza o **Ansible Automation Platform (AAP)** integrado ao **GitHub** para simular um fluxo real de GitOps.
 
 ## 📊 Topologia do Laboratório
 Abaixo, a representação visual dos **Targets (Alvos)** que iremos automatizar neste workshop:
@@ -16,38 +16,42 @@ Abaixo, a representação visual dos **Targets (Alvos)** que iremos automatizar 
 
 ## 🛠️ Preparação Inicial (Obrigatório)
 
-Para facilitar o desenvolvimento, vamos criar um **Link Simbólico**. Isso fará com que sua pasta de trabalho no VS Code seja "espelhada" automaticamente para o diretório de projetos do AAP.
+Siga exatamente estes passos para configurar seu ambiente de trabalho no VS Code:
 
-### 1. Criar sua Pasta de Desenvolvimento
-No terminal do seu VS Code, crie a pasta raiz do projeto (substitua `seu-nome` pelo seu identificador, ex: `goku`):
+### 1. Configurar sua Identidade Git
+Antes de clonar, identifique-se para que seus commits fiquem registrados:
 ~~~bash
-mkdir -p ~/ansible-workshop-desafio-seu-nome
-cd ~/ansible-workshop-desafio-seu-nome
+git config --global user.name "Seu Nome Sobrenome"
+git config --global user.email "seu-email@exemplo.com"
 ~~~
 
-### 2. Criar o Link Simbólico com o AAP
-Execute o comando abaixo para conectar sua pasta de usuário ao diretório que o AAP monitora:
+### 2. Clonar o Repositório
+Faça o download do código base para o seu VS Code:
 ~~~bash
-# Comando para espelhar sua pasta (Ajuste o 'seu-nome' no final do caminho de destino)
-sudo ln -s ~/ansible-workshop-desafio-seu-nome /home/ec2-user/aap/controller/data/projects/ansible-workshop-desafio-seu-nome
-
-# Garanta as permissões de acesso para o container do AAP
-sudo chmod -R 777 ~/ansible-workshop-desafio-seu-nome
+git clone https://github.com/dfmateus/ansible-lab-desafio.git
+cd ansible-lab-desafio
 ~~~
 
-### 3. Criar Arquivos de Orquestração (Raiz)
-Crie os playbooks principais na raiz da sua pasta de trabalho:
+### 3. Criar sua Branch Exclusiva (IMPORTANTE)
+Para não sobrescrever o trabalho dos colegas, você **DEVE** criar uma branch com seu nome:
 ~~~bash
-touch debug_facts.yml health_check_run.yml website_run.yml
+# Padrão: desafio/nome-sobrenome
+git checkout -b desafio/goku-silva
 ~~~
 
-### 4. Criar as Roles Profissionalmente
-Utilizaremos o `ansible-galaxy` para gerar a estrutura correta. Execute dentro da pasta do projeto:
+### 4. Criar as Roles
+Utilize o `ansible-galaxy` para gerar a estrutura:
 ~~~bash
 mkdir roles
 ansible-galaxy init roles/webserver
 ansible-galaxy init roles/loadbalancer
 ansible-galaxy init roles/health_check
+~~~
+
+### 5. Arquivos de Orquestração
+Crie os playbooks na raiz:
+~~~bash
+touch debug_facts.yml health_check_run.yml website_run.yml
 ~~~
 
 ---

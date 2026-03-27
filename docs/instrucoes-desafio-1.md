@@ -1,40 +1,35 @@
 # 🏥 Instruções: Desafio 1 - Auditoria e Saúde (Health Check)
 
-Sua missão é gerar um relatório técnico detalhado sobre o estado atual de cada servidor **Target** utilizando os recursos de automação do Ansible.
+Sua missão é gerar um relatório técnico detalhado sobre o estado atual de cada servidor **Target** utilizando os recursos de automação do Ansible e versionamento via Git.
 
 ---
 
 ## 🔍 Atividade 0 - Aquecimento: O Poder do `gather_facts`
 
-Antes de automatizar o relatório, você precisa conectar sua pasta ao AAP e entender como os dados são organizados.
+Antes de automatizar o relatório, você precisa conectar sua branch ao AAP e entender como os dados são organizados.
 
-### 1. Configurar o Projeto no AAP
-Para que o AAP enxergue seus arquivos locais via link simbólico:
+### 1. Enviar seu código para o GitHub
+Para que o AAP consiga executar seu teste, você deve enviar seu progresso inicial para sua branch:
+~~~bash
+git add debug_facts.yml
+git commit -m "Atividade 0: Explorando facts para o relatório"
+# O instrutor fornecerá o Token para o push
+git push origin aluno/seu-nome-sobrenome
+~~~
+
+### 2. Configurar o Projeto no AAP
+Agora, conecte o AAP ao seu repositório:
 1. No console do AAP, vá em **Resources -> Projects -> Add**.
 2. **Name:** `Projeto - Seu Nome`
-3. **Source Control Type:** Selecione `Manual`.
-4. **Project Base Path:** Confirme se está em `/home/ec2-user/aap/controller/data/projects`.
-5. **Playbook Directory:** Selecione a sua pasta (ex: `ansible-workshop-desafio-seu-nome`).
+3. **Source Control Type:** Selecione `Git`.
+4. **Source Control URL:** `https://github.com/dfmateus/ansible-lab-desafio.git`
+5. **Source Control Branch:** Digite o nome da **SUA** branch (ex: `aluno/goku-silva`).
 6. Clique em **Save**.
-
-### 2. No VS Code (Desenvolvimento)
-Utilize o arquivo `debug_facts.yml` na raiz da sua pasta de trabalho:
-
-~~~yaml
----
-- name: 🔍 Explorando os Ansible Facts (Fatos do Ansible)
-  hosts: all
-  gather_facts: true
-  tasks:
-    - name: 📝 Exibir todos os dados coletados na saída do Job
-      ansible.builtin.debug:
-        var: ansible_facts
-~~~
 
 ### 3. Execução no AAP
 * Crie um **Job Template** chamado `[Workshop] - Gather Facts - Seu Nome`.
 * Selecione o seu **Projeto** e o Playbook **`debug_facts.yml`**.
-* **Execute** e analise o log JSON para identificar as chaves exatas que você usará no relatório abaixo (ex: `ansible_memtotal_mb`, `ansible_distro`, etc).
+* **Execute** e analise o log JSON para identificar as chaves exatas que você usará no relatório abaixo (ex: `ansible_memtotal_mb`, `ansible_distribution`, etc).
 
 ---
 
@@ -82,7 +77,7 @@ Gateway:       {{ ? | default('N/A') }}
 ~~~yaml
 ---
 - name: 🏥 Executar Diagnóstico de Saúde
-  hosts: all # TODO: Defina os hosts (all ou o grupo de servidores)
+  hosts: ? # TODO: Defina os hosts (all ou o grupo de servidores)
   gather_facts: ? # TODO: Habilite a coleta de fatos (yes/no)
   become: ? # TODO: Habilite o privilégio de root se necessário (yes/no)
   
@@ -92,11 +87,11 @@ Gateway:       {{ ? | default('N/A') }}
 ~~~
 
 ### 3. Publicação e Validação (AAP)
-Como você está usando um **Link Simbólico**, não é necessário fazer upload. O AAP reflete suas alterações assim que você salva o arquivo no VS Code.
+Diferente do modo manual, agora o AAP precisa que você "suba" as alterações para o GitHub.
 
-1. No console do AAP, crie um novo Job Template chamado **`Desafio 1 - Auditoria e Saude - Seu Nome`**.
-2. Selecione o Playbook **`health_check_run.yml`**.
-3. Garanta que a credencial de **Machine** esteja selecionada.
+1. **Push:** No VS Code, salve tudo, faça o `commit` e o `push` para sua branch.
+2. **Sync:** No console do AAP, vá em seu **Project** e clique no ícone de sincronismo (🔄) para baixar o código novo do GitHub.
+3. **Job Template:** Crie o Job **`Desafio 1 - Auditoria e Saude - Seu Nome`** apontando para o playbook `health_check_run.yml`.
 4. **Launch:** Execute o Job e acompanhe o log.
 
 ---
@@ -105,7 +100,7 @@ Como você está usando um **Link Simbólico**, não é necessário fazer upload
 - [ ] **Status do Job:** O Job finalizou com sucesso (Verde) no AAP?
 - [ ] **Arquivo Criado:** Acesse um dos servidores via terminal e verifique: `cat /tmp/health_report.txt`.
 - [ ] **Dados Dinâmicos:** O relatório exibe as informações reais capturadas ou sobraram interrogações?
-- [ ] **Lógica:** O cálculo de RAM Usada (`Total - Free`) está exibindo o valor correto?
+- [ ] **Git:** Você sincronizou seu projeto no AAP após o último `git push`?
 
 ---
 [⬅️ Voltar para o README Principal](../README.md)
